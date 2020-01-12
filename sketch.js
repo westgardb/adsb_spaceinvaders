@@ -9,10 +9,13 @@ let currentGameState;
 let exoFont;
 let bgImage;
 let playerImage;
-let invaderImage
+let invaderImage;
+
+let SCREEN_WIDTH = 700;
+let SCREEN_HEIGHT = 700;
 
 function setup() {
-	createCanvas(500,500);
+	createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
 	player = new Starship();
 	points = 0;
 
@@ -26,8 +29,6 @@ function setup() {
 	exoFont = loadFont('assets/Exo2-BlackItalic.ttf');
 	textFont(exoFont);
 	textSize(20);
-
-	nextWave();
 }
 
 function draw() {
@@ -50,7 +51,8 @@ function runGame() {
 	stroke(255,255,255);
 	fill(255,255,255);
 	strokeWeight(0);
-	text(`Score: ${points}`, 10,480);
+	textSize(20);
+	text(`Score: ${points}`, width/2, height - 20);
 
 	player.display();
 
@@ -80,11 +82,12 @@ function runStartMenu() {
 	fill(255,255,255);
 	strokeWeight(0);
 	
+	textAlign(CENTER);
 	textSize(40);
-	text("Space Invaders", 100, 200);
+	text("Space Invaders", width/2, height/2 - 40);
 
 	textSize(20);
-	text("Press Space to Play", 150, 300);
+	text("Press Space to Play", width/2, height/2 + 50);
 
 	if(keyIsDown(32)) {
 		currentGameState = "runGame";
@@ -93,20 +96,22 @@ function runStartMenu() {
 		torpedos = [];
 		lasers = [];
 		player = new Starship();
-		nextWave();
+		nextWave(7);
 	}
 }
 
 function runLoseMenu() {
-	background(0,0,0);
+	background(bgImage);
 	
 	stroke(255,255,255);
 	fill(255,255,255);
 	strokeWeight(0);
-	text(`Score: ${points}`, 200,250);
-	text("Game Over :(", 200, 200);
+	
+	textSize(30);
+	text(`Score: ${points}`, width/2 ,250);
+	text("Game Over :(", width/2, 200);
 
-	text("Press Space to Try Again", 200, 300);
+	text("Press Space to Try Again", width/2, 300);
 
 	if(keyIsDown(32)) {
 		currentGameState = "runGame";
@@ -115,14 +120,15 @@ function runLoseMenu() {
 		torpedos = [];
 		lasers = [];
 		player = new Starship();
-		nextWave();
+		nextWave(7);
 	}
 }
 
-function nextWave() {
+function nextWave(numEnemies) {
 	invaders = [];
+	spacing = (width)/(numEnemies + 1);
 
-	for (let i = 0; i < 8; i++) {
-		invaders.push(new Invader((50*i) + 50, -20));
+	for (let i = 0; i < numEnemies; i++) {
+		invaders.push(new Invader(Math.round((i+1)*spacing), -20));
 	}
 }

@@ -1,7 +1,7 @@
 class Starship {
 	constructor() {
 		this.x = width/2
-		this.y = 400
+		this.y = SCREEN_HEIGHT - 100;
 		this.xvel = 0
 		this.accel = 0.7
 		this.decell = 0.5

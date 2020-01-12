@@ -38,7 +38,7 @@ class Invader {
 					}
 					
 					if (!this.hasCompanions()) {
-						nextWave();
+						nextWave(7);
 					}
 				}
 			}
