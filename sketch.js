@@ -1,6 +1,7 @@
 let invaders = [];
 let torpedos = [];
 let lasers = [];
+let powerUps = [];
 let player;
 let points;
 
@@ -10,6 +11,7 @@ let exoFont;
 let bgImage;
 let playerImage;
 let invaderImage;
+let powerUpImage;
 
 let SCREEN_WIDTH = 700;
 let SCREEN_HEIGHT = 700;
@@ -69,6 +71,11 @@ function runGame() {
 	for (let i = 0; i < torpedos.length; i++) {
 		torpedos[i].display();
 		torpedos[i].update();
+	}
+
+	for (let i = 0; i < powerUps.length; i++) {
+		powerUps[i].display();
+		powerUps[i].update();
 	}
 
 	player.detectInput();

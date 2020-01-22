@@ -8,7 +8,8 @@ class Invader {
 	coolDown = Math.floor(random(100, 250));
 	fireRate = Math.floor(random(130, 250));
 	
-	
+	powerupDropPercent = 20;
+
 	constructor(x, y) {
 		this.x = x;
 		this.y = y;
@@ -17,9 +18,6 @@ class Invader {
 
 	display() {
 		if (this.isAlive) {
-			// stroke(0, 255, 0);
-			// fill(0, 255, 0);
-			// triangle(this.x, this.y + 20, this.x + 10, this.y, this.x - 10, this.y);
 
 			image(invaderImage, this.x-16, this.y-16);
 
@@ -32,11 +30,13 @@ class Invader {
 			for (let i = 0; i < torpedos.length; i++) {
 				if (Math.pow(this.x - torpedos[i].x, 2) + Math.pow(this.y - torpedos[i].y, 2) <= Math.pow(this.hitRadius, 2)) {
 					
-					if (this.isAlive) {
-						this.isAlive = false;
-						points++;
-					}
+					this.isAlive = false;
+					points++;
 					
+					if(random(100) <= this.powerupDropPercent) {
+						powerUps.push(new PowerUp(fastFire, this.x, this.y));
+					}
+
 					if (!this.hasCompanions()) {
 						nextWave(7);
 					}
