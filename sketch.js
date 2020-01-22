@@ -6,6 +6,7 @@ let player;
 let points;
 
 let currentGameState;
+let level = 0;
 
 let exoFont;
 let bgImage;
@@ -54,7 +55,7 @@ function runGame() {
 	fill(255,255,255);
 	strokeWeight(0);
 	textSize(20);
-	text(`Score: ${points}`, width/2, height - 20);
+	text(`Score: ${points}   Level: ${level + 1}`, width/2, height - 20);
 
 	player.display();
 
@@ -103,7 +104,7 @@ function runStartMenu() {
 		torpedos = [];
 		lasers = [];
 		player = new Starship();
-		nextWave(7);
+		nextWave();
 	}
 }
 
@@ -127,12 +128,14 @@ function runLoseMenu() {
 		torpedos = [];
 		lasers = [];
 		player = new Starship();
-		nextWave(7);
+		level = 0;
+		nextWave();
 	}
 }
 
-function nextWave(numEnemies) {
+function nextWave() {
 	invaders = [];
+	numEnemies = 5 + Math.floor(level/3);
 	spacing = (width)/(numEnemies + 1);
 
 	for (let i = 0; i < numEnemies; i++) {

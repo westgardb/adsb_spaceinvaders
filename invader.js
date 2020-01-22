@@ -34,11 +34,12 @@ class Invader {
 					points++;
 					
 					if(random(100) <= this.powerupDropPercent) {
-						powerUps.push(new PowerUp(fastFire, this.x, this.y));
+						powerUps.push(new PowerUp(this.x, this.y));
 					}
 
 					if (!this.hasCompanions()) {
-						nextWave(7);
+						level++;
+						nextWave();
 					}
 				}
 			}

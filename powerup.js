@@ -3,10 +3,10 @@ class PowerUp {
     pickupRadius = 25;
     used = false;
 
-    constructor(behavior, x, y) {
-        this.behavior = behavior;
+    constructor(x, y) {
         this.x = x;
         this.y = y;
+        //this.behavior = fastFire;
     }
 
     display() {
@@ -18,8 +18,8 @@ class PowerUp {
 
     update() {
         this.y += this.fallSpeed;
-        if(Math.pow(this.x - player.x, 2) + Math.pow(this.y - player.y, 2) <= Math.pow(this.pickupRadius, 2)) {
-            this.behavior();
+        if(Math.pow(this.x - player.x, 2) + Math.pow(this.y - player.y, 2) <= Math.pow(this.pickupRadius, 2) && this.used == false) {
+            behaviors[Math.floor(Math.random()*behaviors.length)]();
             this.used = true;
         }
     }

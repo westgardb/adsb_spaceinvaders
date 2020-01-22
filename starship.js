@@ -7,9 +7,10 @@ class Starship {
 		this.decell = 0.5
 		this.maxSpeed = 5
 		this.hitRadius = 15
-
-		this.coolDown = 15
-		this.fireRate = 30
+		
+		this.numShots = 1;
+		this.coolDown = 15;
+		this.fireRate = 30;
 	}
 
 	display() {
@@ -51,7 +52,18 @@ class Starship {
 		if (keyIsDown(32)) {
 			if (this.coolDown == 0) {
 				this.coolDown = this.fireRate;
-				torpedos.push(new Torpedo(this.x, this.y - 40, 0));
+				
+				if(this.numShots == 1) {
+					torpedos.push(new Torpedo(this.x, this.y - 40, 0));
+				} else if(this.numShots == 2) {
+					torpedos.push(new Torpedo(this.x + 10, this.y - 40, 0));
+					torpedos.push(new Torpedo(this.x - 10, this.y - 40, 0));
+				} else if(this.numShots == 3) {
+					torpedos.push(new Torpedo(this.x, this.y - 40, -4));
+					torpedos.push(new Torpedo(this.x, this.y - 40, 0));
+					torpedos.push(new Torpedo(this.x, this.y - 40, 4));
+				}
+				
 			}
 		}
 
